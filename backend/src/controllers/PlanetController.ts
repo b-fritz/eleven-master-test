@@ -64,8 +64,7 @@ const PlanetController = {
   },
 
   update: async (req: Request, res: Response): Promise<void> => {
-    const { id } = req.params;
-    const { name, isHabitable, imageId } = req.body;
+    const { name, isHabitable, imageId, id } = req.body;
     try {
       const updatedRows = await knex("planets")
         .where("id", id)

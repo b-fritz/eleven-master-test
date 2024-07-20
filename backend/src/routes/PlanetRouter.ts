@@ -3,10 +3,10 @@ import PlanetController from "../controllers/PlanetController";
 
 const router = express.Router();
 
-router.get("/allPlanets", PlanetController.getAll);
+router.get("/", PlanetController.getAll);
 router.get("/:id", PlanetController.getById);
 router.post("/create", PlanetController.create);
-router.post("/update/:id", PlanetController.update);
-router.post("/delete/:id", PlanetController.delete);
+router.put("/update", PlanetController.update);
+router.delete("/delete/:id", PlanetController.delete);
 
 export default router;

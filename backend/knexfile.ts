@@ -5,8 +5,7 @@ import path from "path";
 const config = {
   client: "mysql2",
   connection: {
-    host: "localhost",
-    port: "3306",
+    host: "db-eleven-test",
     user: "eleven",
     password: "eleven11",
     database: "eleven",
