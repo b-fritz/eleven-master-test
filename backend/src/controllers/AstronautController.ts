@@ -5,14 +5,17 @@ const AstronautController = {
   getAll: async (req: Request, res: Response): Promise<void> => {
     try {
       const astronauts = (
-        await knex("astronauts").select(
-          "astronauts.*",
-          "planets.name",
-          "planets.description",
-          "planets.isHabitable",
-          "images.path",
-          "images.name as imageName",
-        )
+        await knex("astronauts")
+          .join("planets", "planets.id", "astronauts.originPlanetId")
+          .join("images", "planets.imageId", "images.id")
+          .select(
+            "astronauts.*",
+            "planets.name",
+            "planets.description",
+            "planets.isHabitable",
+            "images.path",
+            "images.name as imageName",
+          )
       ).map(
         ({
           id,
@@ -40,6 +43,7 @@ const AstronautController = {
       );
       res.status(200).json(astronauts);
     } catch (error) {
+      console.error(error);
       res.status(500).json({ error: "Internal Server Error" });
     }
   },

@@ -1,10 +1,10 @@
-// import Planet from "./Planet";
+import Planet from "./Planet";
 
 interface Astronaut {
   id: number;
   firstname: string;
   lastname: string;
-  originPlanetId: number;
+  originPlanet: Planet;
 }
 
 export default Astronaut;
