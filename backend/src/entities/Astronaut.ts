@@ -1,10 +1,9 @@
-// import Planet from "./Planet";
+import Planet from "./Planet";
 
-interface Astronaut {
+interface Astronaut extends Planet {
   id: number;
   firstname: string;
   lastname: string;
-  originPlanetId: number;
 }
 
 export default Astronaut;

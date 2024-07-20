@@ -7,11 +7,11 @@ const AstronautController = {
       const astronauts = (
         await knex("astronauts").select(
           "astronauts.*",
-          "planets.name",
-          "planets.description",
-          "planets.isHabitable",
-          "images.path",
-          "images.name as imageName",
+          // "planets.name",
+          // "planets.description",
+          // "planets.isHabitable",
+          // "images.path",
+          // "images.name as imageName",
         )
       ).map(
         ({
@@ -40,6 +40,7 @@ const AstronautController = {
       );
       res.status(200).json(astronauts);
     } catch (error) {
+      console.info(error);
       res.status(500).json({ error: "Internal Server Error" });
     }
   },
