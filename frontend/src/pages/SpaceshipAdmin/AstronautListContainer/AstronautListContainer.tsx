@@ -2,24 +2,22 @@
 import {
   AstronautForList,
   HUDAstronautList,
-} from '../../../components/HUDAstronautList';
-import { HUDWindowLoader } from '../../../components/HUDWindowLoader';
+} from "../../../components/HUDAstronautList";
+import { HUDWindowLoader } from "../../../components/HUDWindowLoader";
 
 // Context
-import { useAstronautList } from '../../../contexts/SpaceshipContext.tsx';
-import { useMessageCenter } from '../../../contexts/MessageCenterContext.tsx';
+import { useAstronautList } from "../../../contexts/SpaceshipContext.tsx";
+import { useMessageCenter } from "../../../contexts/MessageCenterContext.tsx";
 
 // Types
 // API
-import { Astronaut, deleteAstronautAPICall } from '../../../api/astronaut.api';
+import { Astronaut, deleteAstronautAPICall } from "../../../api/astronaut.api";
 
 // Styles
-import styles from './AstronautListContainer.module.css';
+import styles from "./AstronautListContainer.module.css";
 
 function mapAstronautList(astronautList?: Astronaut[] | null) {
-  if (!astronautList) {
-    return [];
-  }
+  if (!astronautList) return [];
 
   return astronautList.map(
     ({ id, firstname, lastname, originPlanet }: Astronaut) => ({
@@ -42,6 +40,7 @@ export function AstronautListContainer({
     astronautList: { isLoading, astronautList: astronauts, error },
     setAstronautList,
   } = useAstronautList();
+
   const { pushInfoMessage, pushErrorMessage } = useMessageCenter();
 
   const handleDeleteAstronaut = async (astronaut: AstronautForList) => {
@@ -66,10 +65,11 @@ export function AstronautListContainer({
   };
 
   if (error) {
-    pushErrorMessage('Eleven Labs space services are not online ...');
+    pushErrorMessage("Eleven Labs space services are not online ...");
     throw error;
   }
-
+  if (astronauts && !isLoading)
+    setAstronautList({ isLoading: true, astronautList: astronauts });
   return (
     <>
       {!isLoading ? (
