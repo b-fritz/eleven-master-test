@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 // Components
 import {
   AstronautForList,
@@ -41,6 +43,10 @@ export function AstronautListContainer({
     setAstronautList,
   } = useAstronautList();
 
+  useEffect(() => {
+    setAstronautList({ isLoading: true, astronautList: astronauts });
+  }, [astronauts]);
+
   const { pushInfoMessage, pushErrorMessage } = useMessageCenter();
 
   const handleDeleteAstronaut = async (astronaut: AstronautForList) => {
@@ -68,8 +74,7 @@ export function AstronautListContainer({
     pushErrorMessage("Eleven Labs space services are not online ...");
     throw error;
   }
-  if (astronauts && !isLoading)
-    setAstronautList({ isLoading: true, astronautList: astronauts });
+
   return (
     <>
       {!isLoading ? (
