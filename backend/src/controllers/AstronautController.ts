@@ -52,6 +52,8 @@ const AstronautController = {
     const { id } = req.params;
     try {
       const data = await knex("astronauts")
+        .join("planets", "planets.id", "astronauts.originPlanetId")
+        .join("images", "planets.imageId", "images.id")
         .select(
           "astronauts.*",
           "planets.*",
