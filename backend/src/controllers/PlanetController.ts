@@ -3,7 +3,6 @@ import knex from "../db";
 
 const PlanetController = {
   getAll: async (req: Request, res: Response): Promise<void> => {
-    console.info("***********", req.query);
     try {
       const planets = (
         await knex("planets")
@@ -34,7 +33,10 @@ const PlanetController = {
   getById: async (req: Request, res: Response): Promise<void> => {
     const { id } = req.params;
     try {
-      const data = await knex("planets").where("id", id).first();
+      const data = await knex("planets")
+        .where("id", id)
+        .join("images", "images.id", "planets.imageId")
+        .first();
       if (data) {
         res.status(200).json({
           id: data.id,
